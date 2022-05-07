@@ -6,7 +6,7 @@
     <div class="row justfy-content-center">
         <div class="col-md-12">
             <h1>Posts</h1>
-            <a href="{{route('posts.create')}}" class="btn btn-success" style="float: right">Add post</a>
+            <a href="{{ route('posts.create' )}}" class="btn btn-success" style="float: right">Add post</a>
             @php
                 $i= 0;
             @endphp
@@ -20,14 +20,18 @@
                     <td scope="col">Action</td>
                   </tr>
                 </thead>
-                @foreach ($posts as $item)
+                @foreach ($posts as $post)
                 <tbody>
                     <tr>
                         <td>{{$i++}}</td>
-                        <td scope="col">{{$item->id}}</td>
-                        <td scope="col">{{$item->title}}</td>
-                        <td scope="col">{{$item->content}}</td>
-                        <td scope="col"><a href="{{ route('posts.show', [$item->id]) }}" class="btn btn-daanger">show </a> </td>
+                        <td scope="col">{{$post->id}}</td>
+                        <td scope="col">{{$post->title}}</td>
+                        <td scope="col">{{$post->content}}</td>
+                        <td scope="col">
+                            <a href="{{ route('posts.show', $post) }}" class="btn btn-daanger">
+                                show
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
                 @endforeach

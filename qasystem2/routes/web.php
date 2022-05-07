@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -16,10 +18,11 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('posts', 'App\Http\Controllers\PostController');
+//Route::resource('posts', 'App\Http\Controllers\PostController');
+Route::resource('posts', PostController::class);
 //Route::post('posts/store', 'PostController@store', 'posts.store');
 //Route::get('posts/create', 'PostController@create', 'posts.create');
-Route::resource('coments', 'App\Http\Controllers\CommentController');
+Route::resource('comments', CommentController::class);
 
 Auth::routes();
 

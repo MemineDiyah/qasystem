@@ -16,16 +16,18 @@ class Comment extends Model
          'user_id', 'post_id', 'parent_id', 'content',
     ];
 
-    /**
-     * Get the user that owns the Comment
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function replies(){
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
+    public function replies()
+    {
         return $this->hasMany(Comment::class, 'parent_id');
     }
 }

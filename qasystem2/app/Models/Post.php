@@ -15,13 +15,10 @@ class Post extends Model
     protected $fillable = [
         'title', 'content',
     ];
-    /**
-     * Get all of the comments for the Post
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+
     public function comments()
     {
-        return $this->hasMany(Comment::class)->whereNull('parent_id');
+        //return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->hasMany(Comment::class);
     }
 }

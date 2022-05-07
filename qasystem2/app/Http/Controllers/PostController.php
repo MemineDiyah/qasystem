@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -22,6 +17,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+
         return view('posts.index', compact('posts'));
     }
 
@@ -32,27 +28,30 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $posts = Post::all();
         $request->validate([
             'title' => 'required',
             'content' => 'required'
         ]);
+
         Post::create($request->all());
-        return view('posts.index', compact('posts'));
+
+        return redirect()->route('posts.index');
     }
 
-    public function show($id)
-    // public function show(Post $post)
+    public function show(Post $post)
     {
-        $post = Post::find($id);
-        // $post = Post::findorfail($id);
-        return view('posts.show', compact('post'));
+        $post->load('comments');
+
+         return view('posts.show', [
+             'post' => $post
+         ]);
     }
 
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::find($id);
-        return view('posts.edit', $post);
+        return view('posts.edit', [
+            'post' => $post
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -62,12 +61,12 @@ class PostController extends Controller
             'content' => 'required'
         ]);
         Post::create($request->all());
+
         return redirect()->route('posts.show');
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::find($id);
         $post->delete();
     }
 }
