@@ -16,6 +16,17 @@ class Post extends Model
         'title', 'content',
     ];
 
+    //--- Public Scopes ---//
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function($model){
+            $model->user_id = auth()->id();
+        });
+    }
+    
+
     public function comments()
     {
         //return $this->hasMany(Comment::class)->whereNull('parent_id');

@@ -16,6 +16,18 @@ class Comment extends Model
          'user_id', 'post_id', 'parent_id', 'content',
     ];
 
+
+    //--- Public Scopes ---//
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function($model){
+            $model->user_id = auth()->id();
+        });
+    }
+
+
     public function user()
     {
         return $this->belongsTo(User::class);

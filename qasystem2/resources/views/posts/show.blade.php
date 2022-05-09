@@ -27,7 +27,6 @@
                                 <div class="mb-3">
                                     <textarea type="text" class="form-control" name= "content"></textarea>
                                     <input type="hidden" class="form-control" name= "post_id" value="{{ $post->id }}">
-                                    <input type="hidden" class="form-control" name= "user_id" value="{{ auth()->user()->id }}">
                                 </div>
                                 <button type="submit" class="btn btn-primary">
                                     Add Comment
